@@ -1,0 +1,24 @@
+.checkout-btns-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.black-btn {
+  width: 150px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.white-btn {
+  width: 150px;
+  background-color: #fff;
+  color: #1a1a1a;
+  border: 1px solid #1a1a1a;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}

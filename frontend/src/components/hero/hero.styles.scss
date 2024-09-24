@@ -1,0 +1,21 @@
+.hero-image {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+  url(../../assets/bg_red_bag.jpg) center/cover no-repeat;
+}
+
+.hero-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #fff0f3;
+}
+
+@media(min-width: 1024px) {
+  .hero-image {
+    font-size: 2.5rem;
+  }
+}
+
+.shop-now-btn {
+  text-align: center;
+  color: #fff0f3;
+}
