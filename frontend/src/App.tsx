@@ -5,6 +5,9 @@ import NotFound from './components/pages/NotFoundPage';
 import CartPage from './components/pages/cart-page/CartPage';
 import Shop from './components/pages/shop/Shop';
 import SingleProduct from './components/single-product/SingleProduct';
+import Checkout from './components/checkout/Checkout';
+import Success from './components/checkout/stripe-checkout/Success';
+import Canceled from './components/checkout/stripe-checkout/Canceled';
 
 function App() {
   return (
@@ -14,9 +17,9 @@ function App() {
         <Route path='/shop' element={<Shop />} />
         <Route path='/product/:id' element={<SingleProduct />} />
         <Route path='/cart' element={<CartPage/>} />
-        {/* <Route path='/checkout' element={Checkout} /> */}
-        {/* <Route path='/success' element={Success} /> */}
-        {/* <Route path='canceled' element={Canceled} /> */}
+        <Route path='/checkout' element={<Checkout />} />
+        <Route path='/success' element={<Success />} />
+        <Route path='canceled' element={<Canceled />} />
         {/* <Route path='/sign-up' element={SignUp} /> */}
         {/* <Route path='/sign-in' element={SignIn} /> */}
         <Route path='*' element={<NotFound />} />
