@@ -1,11 +1,5 @@
 import axios from 'axios';
 import { envConfig } from '../config/config';
-import { ICartItem, IProduct } from '../interfaces';
-
-export const isInCart = (product: IProduct, cartItems: ICartItem[]) => {
-  return cartItems.find(item => item.id === product.id);
-}
-
 const API = envConfig.apiUrl;
 
 export const fetchFromAPI = async (endpoint: string, options: any = {}) => {

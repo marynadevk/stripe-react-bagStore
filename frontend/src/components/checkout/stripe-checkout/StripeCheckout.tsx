@@ -1,7 +1,7 @@
 import { FormEvent, useContext, useState } from 'react';
 import { useStripe } from '@stripe/react-stripe-js';
 import { CartContext } from '../../../context/cartContext';
-import { fetchFromAPI } from '../../../helpers/helpers';
+import { fetchFromAPI } from '../../../helpers/fetchFromAPI';
 
 const StripeCheckout = () => {
   const stripe = useStripe();

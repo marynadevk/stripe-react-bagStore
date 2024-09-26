@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import stripeAPI from '../stripe';
 import httpStatus from 'http-status';
 import { CustomRequest } from '..';
@@ -16,13 +16,14 @@ const webHookHandlers: { [key: string]: (data: any) => void } = {
   }
 };
 
-export const webhook = (req: CustomRequest, res: Response) => {
-  const sig = req.headers['stripe-signature'] as string;
-  let event;
+export const webhook = (req: Request, res: Response): Response => {
+  const request = req as CustomRequest;
 
+  const sig = request.headers['stripe-signature'] as string;
+  let event;
   try {
     event = stripeAPI.webhooks.constructEvent(
-      req['rawBody'], sig, envStripe.webhookSecret
+      request['rawBody'], sig, envStripe.webhookSecret
     );
   } catch (error) {
     return res.status(httpStatus.BAD_REQUEST).send(`Webhook error: ${error}`);
@@ -33,5 +34,5 @@ export const webhook = (req: CustomRequest, res: Response) => {
     handler(event.data.object);
   }
 
-  res.status(httpStatus.OK).send('Webhook received');
+  return res.status(httpStatus.OK).send('Webhook received');
 };

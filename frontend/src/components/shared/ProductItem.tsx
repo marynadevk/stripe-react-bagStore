@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../context/cartContext';
 import './productItem.scss';
 import { IProduct } from '../../interfaces';
-import { isInCart } from '../../helpers/helpers';
+import { isInCart } from '../../helpers/isInCart';
 
 type Props = {
   product: IProduct;
