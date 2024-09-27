@@ -1,18 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
 import { auth } from '../firebase';
+import { ICustomRequest } from '..';
 
-
-interface CustomRequest extends Request {
-  currentUser?: any;
-}
-
-export const decodeJWT = async(req: CustomRequest, _res: Response, next: NextFunction) => {
-  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
-    const idToken = req.headers.authorization.split('Bearer ')[1];
+export const decodeJWT = async(req: Request, _res: Response, next: NextFunction) => {
+  const request = req as ICustomRequest;
+  if (request.headers.authorization && request.headers.authorization.startsWith('Bearer ')) {
+    const idToken = request.headers.authorization.split('Bearer ')[1];
 
     try {
       const decodedToken = await auth.verifyIdToken(idToken);
-      req.currentUser = decodedToken;
+      request.currentUser = decodedToken;
     } catch (error) {
       console.log(error);
       throw new Error('User not authenticated');

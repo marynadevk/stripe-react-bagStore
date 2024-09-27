@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc, getDoc, setDoc, DocumentReference } from 'firebase/firestore';
-import { getAuth, User } from 'firebase/auth'; // User is used to type `userAuth`
+import { getAuth, User } from 'firebase/auth';
 import { envFirebase } from '../config/config';
 
 const firebaseConfig = {

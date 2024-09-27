@@ -1,16 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import httpStatus from 'http-status';
-
-interface CustomRequest extends Request {
-  currentUser?: any;
-}
+import { ICustomRequest } from '..';
 
 export const validateUser = (
-  req: CustomRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const user = req.currentUser;
+  const request = req as ICustomRequest;
+  const user = request.currentUser;
   if (!user) {
     return res.status(httpStatus.UNAUTHORIZED).send();
   }

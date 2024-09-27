@@ -5,7 +5,7 @@ import { auth } from '../firebase/firebase';
 const API = envConfig.apiUrl;
 
 export const fetchFromAPI = async (endpoint: string, options: any = {}) => {
-  const { method = 'POST', body = null } = options;
+  const { method = 'POST', body = {} } = options;
   const user = auth.currentUser;
   const token = user && (await user.getIdToken());
   try {

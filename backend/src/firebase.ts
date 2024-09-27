@@ -1,16 +1,14 @@
-"use strict";
-
 import * as admin from 'firebase-admin';
-import path from 'path';
-// import { ServiceAccount } from 'firebase-admin'; // For proper TypeScript typing
+import { envFirebase } from './config/config';
+
 
 admin.initializeApp({
-  credential: admin.credential.cert(
-    path.resolve(__dirname, process.env.GOOGLE_APP_CREDENTIALS!)
-  ),
+  credential: admin.credential.cert(envFirebase as admin.ServiceAccount),
 });
 
 const db = admin.firestore();
 const auth = admin.auth();
 
 export { admin, db, auth };
+
+console.log('!!!!!!!!!!!________Firebase initialized', admin);
