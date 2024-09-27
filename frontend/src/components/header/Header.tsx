@@ -1,16 +1,19 @@
 import { Link } from 'react-router-dom';
 import './header.styles.scss';
 import CartIcon from '../cart-icon/CartIcon';
-
-const navItems = [
-  { path: '/', label: 'Home' },
-  { path: '/shop', label: 'Shop' },
-  { path: '/sign-in', label: 'Sign In' },
-  { path: '/sign-out', label: 'Sign Out', isLink: false },
-  { path: '/sign-up', label: 'Sign Up' },
-];
+import { useContext } from 'react';
+import { UserContext } from '../../context/userContext';
+import { auth } from '../../firebase/firebase';
 
 const Header = () => {
+  const { user } = useContext(UserContext);
+  const navItems = [
+    { path: '/', label: 'Home', isVisible: true },
+    { path: '/shop', label: 'Shop', isVisible: true },
+    { path: '/sign-in', label: 'Sign In', isVisible: !user },
+    { path: '/sign-up', label: 'Sign Up', isVisible: !user },
+  ];
+
   return (
     <nav className="nav-menu container">
       <div className="logo">
@@ -19,13 +22,10 @@ const Header = () => {
       <ul>
         {navItems.map((item, index) => (
           <li key={index}>
-            {item.isLink === false ? (
-              item.label
-            ) : (
-              <Link to={item.path}>{item.label}</Link>
-            )}
+            {item.isVisible && <Link to={item.path}>{item.label}</Link>}
           </li>
         ))}
+        {user && <li onClick={() => auth.signOut()}>Sign Out</li>}
       </ul>
       <CartIcon />
     </nav>

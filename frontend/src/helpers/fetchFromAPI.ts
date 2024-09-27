@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { envConfig } from '../config/config';
+import { auth } from '../firebase/firebase';
+
 const API = envConfig.apiUrl;
 
 export const fetchFromAPI = async (endpoint: string, options: any = {}) => {
   const { method = 'POST', body = null } = options;
-
+  const user = auth.currentUser;
+  const token = user && (await user.getIdToken());
   try {
     const res = await axios({
       method,
@@ -12,6 +15,7 @@ export const fetchFromAPI = async (endpoint: string, options: any = {}) => {
       data: body,
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -19,4 +23,4 @@ export const fetchFromAPI = async (endpoint: string, options: any = {}) => {
   } catch (error: any) {
     throw new Error(error.response?.statusText || error.message);
   }
-}
+};

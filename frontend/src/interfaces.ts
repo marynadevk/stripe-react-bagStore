@@ -14,16 +14,14 @@ export interface IInputValues {
   name?: string;
   email?: string;
   address?: string;
+  firstname?: string;
+  password?: string;
 }
 
 export interface IInputErrors {
   name?: string;
   email?: string;
   address?: string;
-}
-
-export interface IShippingData {
-  name: string;
-  email: string;
-  address: string;
+  firstname?: string;
+  password?: string;
 }

@@ -8,10 +8,11 @@ import {
   useElements
 } from '@stripe/react-stripe-js';
 import { fetchFromAPI } from '../../../helpers/fetchFromAPI';
-import { ICartItem, IShippingData } from '../../../interfaces';
+import { ICartItem } from '../../../interfaces';
+import { ShippingData } from '../Checkout';
 
 type Props = {
-  shipping: IShippingData;
+  shipping: ShippingData;
   cartItems: ICartItem[];
 }
 

@@ -8,6 +8,8 @@ import SingleProduct from './components/single-product/SingleProduct';
 import Checkout from './components/checkout/Checkout';
 import Success from './components/checkout/stripe-checkout/Success';
 import Canceled from './components/checkout/stripe-checkout/Canceled';
+import SignUp from './components/sign-up/SignUp';
+import SignIn from './components/sign-in/SignIn';
 
 function App() {
   return (
@@ -20,8 +22,8 @@ function App() {
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/success' element={<Success />} />
         <Route path='canceled' element={<Canceled />} />
-        {/* <Route path='/sign-up' element={SignUp} /> */}
-        {/* <Route path='/sign-in' element={SignIn} /> */}
+        <Route path='/sign-up' element={<SignUp />} />
+        <Route path='/sign-in' element={<SignIn />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>

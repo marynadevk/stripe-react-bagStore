@@ -3,18 +3,7 @@ import stripeAPI from '../stripe';
 import httpStatus from 'http-status';
 import { CustomRequest } from '..';
 import { envStripe } from '../config/config';
-
-const webHookHandlers: { [key: string]: (data: any) => void } = {
-  'checkout.session.completed': (data) => {
-    console.log('Checkout completed successfully', data);
-  },
-  'payment_intent.succeeded': (data) => {
-    console.log('Payment succeeded', data);
-  },
-  'payment_intent.payment_failed': (data) => {
-    console.log('Payment Failed', data);
-  }
-};
+import { webHookHandlers } from '../helpers/webHookHandlers';
 
 export const webhook = (req: Request, res: Response): Response => {
   const request = req as CustomRequest;

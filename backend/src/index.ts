@@ -4,6 +4,7 @@ import { envConfig } from './config/config';
 import createCheckoutSession from './api/checkout';
 import { webhook } from './api/webhook';
 import { paymentIntent } from './api/paymentIntent';
+import { decodeJWT } from './auth/decodeJWT';
 
 export interface CustomRequest extends Request {
   rawBody: Buffer | string;
@@ -18,6 +19,8 @@ app.use(
     verify: (req: CustomRequest, _res, buffer) => (req.rawBody = buffer),
   })
 );
+
+app.use(decodeJWT);
 
 app.get('/', (_req, res) => {
   res.send('Hello World!');

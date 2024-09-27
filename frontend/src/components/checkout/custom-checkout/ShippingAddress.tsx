@@ -1,14 +1,32 @@
 import { Formik } from 'formik';
-import { validateInput } from '../../../helpers/validateInput';
 import { FC } from 'react';
+import { IInputErrors, IInputValues } from '../../../interfaces';
 
-type FormValues = {
-  email: string;
-  name: string;
-  address: string;
+type FormValues = Pick<IInputValues, 'name' | 'email' | 'address'>;
+type FormErrors = Pick<IInputErrors, 'name' | 'email' | 'address'>;
+
+const validate = (values: FormValues): FormErrors => {
+  const errors: FormErrors = {};
+
+  if (!values.email) {
+    errors.email = 'Required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+    errors.email = 'Invalid email address';
+  }
+  if (!values.name) {
+    errors.name = 'Required';
+  }
+  if (!values.address) {
+    errors.address = 'Required';
+  }
+  return errors;
 };
 
-const FIELDS: Array<{ type: string; name: keyof FormValues; placeholder: string }>  = [
+const FIELDS: Array<{
+  type: string;
+  name: keyof FormValues;
+  placeholder: string;
+}> = [
   { type: 'text', name: 'name', placeholder: 'Name' },
   { type: 'email', name: 'email', placeholder: 'Email' },
   { type: 'text', name: 'address', placeholder: 'Address' },
@@ -19,19 +37,19 @@ type Props = {
 };
 
 const ShippingAddress: FC<Props> = ({ setShipping }) => {
-  const initialValues = {
+  const initialValues: FormValues = {
     email: '',
     name: '',
     address: '',
   };
+
   return (
     <div>
       <h4>Shipping Address</h4>
       <Formik
         initialValues={initialValues}
-        validate={validateInput}
+        validate={validate}
         onSubmit={(values) => {
-          console.log('values', values);
           setShipping(values);
         }}
       >

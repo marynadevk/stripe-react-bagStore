@@ -7,6 +7,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import App from './App';
 import { envStripe } from './config/config';
+import UserContextProvider from './context/userContext';
 
 const stripePromise = loadStripe(envStripe.secretKey);
 const root = ReactDOM.createRoot(
@@ -18,7 +19,9 @@ root.render(
     <ProductsContextProvider>
       <CartContextProvider>
         <Elements stripe={stripePromise}>
-          <App />
+          <UserContextProvider>
+            <App />
+          </UserContextProvider>
         </Elements>
       </CartContextProvider>
     </ProductsContextProvider>
